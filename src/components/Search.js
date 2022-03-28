@@ -1,7 +1,12 @@
 const Search = () => {
   return (
     <div className="search-block d-flex align-center">
-      <img width={18} height={18} src="/img/search.svg" alt="searchIcon" />
+      <img
+        width={18}
+        height={18}
+        src="/img/search.svg"
+        alt="searchIcon"
+      />
       <input placeholder="Поиск..." />
     </div>
   );
