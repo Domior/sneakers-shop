@@ -67,8 +67,7 @@ const Drawer = ({ items = [], onItemRemove, onClose }) => {
             />
             <h2 className="mb-15">Корзина пустая</h2>
             <p className="opacity-6">
-              Добавьте хотя бы одну пару кроссовок, чтобы сделать
-              заказ.
+              Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
             </p>
             <button onClick={onClose} className="greenButton">
               <img src="/img/arrow.svg" alt="Arrow" />
