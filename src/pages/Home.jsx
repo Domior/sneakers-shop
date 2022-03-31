@@ -1,8 +1,9 @@
+import React from 'react';
+
 import Card from '../components/Card';
 
 const Home = ({
   items,
-  cartItems,
   searchValue,
   setSearchValue,
   onAddToCart,
@@ -15,10 +16,9 @@ const Home = ({
     );
     return (isLoading ? [...Array(8)] : filteredItems).map((item, i) => (
       <Card
-        key={i}
+        key={item ? item.id : i}
         onPlusClick={() => onAddToCart(item)}
         onFavoriteClick={() => onAddToFavorites(item)}
-        isInCart={cartItems.some(el => +el.id === +item.id)}
         isLoaded={isLoading}
         {...item}
       />

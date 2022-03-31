@@ -1,4 +1,5 @@
 import React from 'react';
+import { AppContext } from '../../context';
 
 import ContentLoader from 'react-content-loader';
 
@@ -11,16 +12,15 @@ const Card = ({
   img,
   onPlusClick,
   onFavoriteClick,
-  isInCart = false,
   isInFavorites = false,
-  isLoaded,
+  isLoaded = false,
 }) => {
-  const [isAdded, setIsAdded] = React.useState(isInCart);
+  const { isInCart } = React.useContext(AppContext);
+
   const [isFavorite, setIsFavorite] = React.useState(isInFavorites);
 
   const handlePlusClick = () => {
     onPlusClick({ id, title, price, img });
-    setIsAdded(!isAdded);
   };
 
   const handleFavoritesClick = () => {
@@ -65,7 +65,7 @@ const Card = ({
             </div>
             <img
               className={styles.plusButton}
-              src={isAdded ? '/img/btn-checked.svg' : '/img/btn-plus.svg'}
+              src={isInCart(id) ? '/img/btn-checked.svg' : '/img/btn-plus.svg'}
               alt="plusIcon"
               onClick={handlePlusClick}
             />
