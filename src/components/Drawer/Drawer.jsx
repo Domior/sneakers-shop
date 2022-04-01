@@ -114,9 +114,7 @@ const Drawer = ({ items = [], onItemRemove, onClose, opened }) => {
                 : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'
             }
             image={
-              isOrderCompleted
-                ? '/img/complete-order.jpg'
-                : '/img/empty-cart.jpg'
+              isOrderCompleted ? 'img/complete-order.jpg' : 'img/empty-cart.jpg'
             }
           />
         )}
