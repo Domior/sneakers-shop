@@ -2,10 +2,9 @@ import React from 'react';
 import axios from 'axios';
 
 import { useCart } from '../hooks/useCart';
+import { API_URL } from '../constants/api';
 
 import CartInfo from './CartInfo';
-
-const API_URL = 'https://624341cd3da3ac772b009b52.mockapi.io';
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 

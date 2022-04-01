@@ -41,7 +41,9 @@ const Header = ({ onCartClick }) => {
           </Link>
         </li>
         <li>
-          <img width={18} height={18} src="/img/user.svg" alt="userIcon" />
+          <Link to="/orders">
+            <img width={18} height={18} src="/img/user.svg" alt="userIcon" />
+          </Link>
         </li>
       </ul>
     </header>
