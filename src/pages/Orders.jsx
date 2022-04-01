@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import Card from '../components/Card';
+import ContentInfo from '../components/ContentInfo';
 
 import { API_URL } from '../constants/api';
 
@@ -34,7 +35,15 @@ const Orders = () => {
     <div className="content p-40">
       <h1 className="mb-40"> Все купленные товары</h1>
 
-      <div className="itemsContainer">{renderItems()}</div>
+      {orders.length > 0 ? (
+        <div className="itemsContainer">{renderItems()}</div>
+      ) : (
+        <ContentInfo
+          title="У вас нет заказов"
+          description="Закажите что-нибудь"
+          image="img/sad-smile.jpg"
+        />
+      )}
     </div>
   );
 };
