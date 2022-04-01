@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { useCart } from '../hooks/useCart';
+import { useCart } from '../../hooks/useCart';
 
 const Header = ({ onCartClick }) => {
   const { orderPrice } = useCart();
