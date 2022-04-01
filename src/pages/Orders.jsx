@@ -14,12 +14,12 @@ const Orders = () => {
     (async () => {
       try {
         const { data } = await axios.get(`${API_URL}/orders`);
-
         setOrders(data.reduce((prev, el) => [...prev, ...el.items], []));
 
         setIsLoading(false);
       } catch (error) {
         alert('Не удалось загрузить купленные товары');
+        console.log(error.message);
       }
     })();
   }, []);

@@ -25,33 +25,50 @@ const App = () => {
 
   React.useEffect(() => {
     async function fetchData() {
-      const cartItemsRes = await axios.get(`${API_URL}/cart`);
-      const favoriteItemsRes = await axios.get(`${API_URL}/favorites`);
-      const itemsRes = await axios.get(`${API_URL}/items`);
+      try {
+        const [cartItemsRes, favoriteItemsRes, itemsRes] = await Promise.all([
+          axios.get(`${API_URL}/cart`),
+          axios.get(`${API_URL}/favorites`),
+          axios.get(`${API_URL}/items`),
+        ]);
 
-      setIsLoading(false);
+        setIsLoading(false);
 
-      setCartItems(cartItemsRes.data);
-      setFavoritesItems(favoriteItemsRes.data);
-      setItems(itemsRes.data);
+        setCartItems(cartItemsRes.data);
+        setFavoritesItems(favoriteItemsRes.data);
+        setItems(itemsRes.data);
+      } catch (error) {
+        alert('Не удалось загрузить данные с сервера');
+        console.log(error.message);
+      }
     }
 
     fetchData();
   }, []);
 
-  const onAddToCart = product => {
-    if (cartItems.find(el => +el.id === +product.id)) {
-      axios.delete(`${API_URL}/cart/${product.id}`);
-      setCartItems(prev => prev.filter(item => +item.id !== +product.id));
-    } else {
-      axios.post(`${API_URL}/cart`, product);
-      setCartItems(prev => [...prev, product]);
+  const onAddToCart = async product => {
+    try {
+      if (cartItems.find(el => +el.id === +product.id)) {
+        setCartItems(prev => prev.filter(item => +item.id !== +product.id));
+        await axios.delete(`${API_URL}/cart/${product.id}`);
+      } else {
+        setCartItems(prev => [...prev, product]);
+        await axios.post(`${API_URL}/cart`, product);
+      }
+    } catch (error) {
+      alert('Не удалось добавить товар в корзину');
+      console.log(error.message);
     }
   };
 
-  const onRemoveFromCart = id => {
-    axios.delete(`${API_URL}/cart/${id}`);
-    setCartItems(prev => prev.filter(item => +item.id !== +id));
+  const onRemoveFromCart = async id => {
+    try {
+      setCartItems(prev => prev.filter(item => +item.id !== +id));
+      await axios.delete(`${API_URL}/cart/${id}`);
+    } catch (error) {
+      alert('Не удалось убрать товар из корзины');
+      console.log(error.message);
+    }
   };
 
   const onAddToFavorites = async product => {
@@ -66,7 +83,8 @@ const App = () => {
         setFavoritesItems(prev => [...prev, data]);
       }
     } catch (error) {
-      alert('Не удалось добавить в закладки');
+      alert('Не удалось добавить товар в закладки');
+      console.log(error.message);
     }
   };
 

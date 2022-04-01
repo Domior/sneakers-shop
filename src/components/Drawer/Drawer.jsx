@@ -34,6 +34,7 @@ const Drawer = ({ items = [], onItemRemove, onClose, opened }) => {
       }
     } catch (error) {
       alert('Не удалось создать заказ');
+      console.log(error.message);
     }
 
     setIsLoading(false);
