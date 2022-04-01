@@ -1,7 +1,8 @@
 import React from 'react';
-import { AppContext } from '../context';
 
 import Card from '../components/Card';
+
+import { AppContext } from '../context';
 
 const Favorites = () => {
   const { favoritesItems, onAddToFavorites, onAddToCart } =

@@ -1,10 +1,9 @@
 import React from 'react';
-
 import axios from 'axios';
 
-import { API_URL } from '../constants/api';
-
 import Card from '../components/Card';
+
+import { API_URL } from '../constants/api';
 
 const Orders = () => {
   const [orders, setOrders] = React.useState([]);

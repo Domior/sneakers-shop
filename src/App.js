@@ -1,10 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-
 import axios from 'axios';
-
-import { AppContext } from './context';
-import { API_URL } from './constants/api';
 
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
@@ -12,6 +8,9 @@ import Orders from './pages/Orders';
 
 import Header from './components/Header';
 import Drawer from './components/Drawer';
+
+import { AppContext } from './context';
+import { API_URL } from './constants/api';
 
 const App = () => {
   const [items, setItems] = React.useState([]);
@@ -89,13 +88,12 @@ const App = () => {
         setSearchValue,
       }}>
       <div className="wrapper clear">
-        {isCartOpened && (
-          <Drawer
-            items={cartItems}
-            onItemRemove={onRemoveFromCart}
-            onClose={() => setIsCartOpened(false)}
-          />
-        )}
+        <Drawer
+          items={cartItems}
+          onItemRemove={onRemoveFromCart}
+          onClose={() => setIsCartOpened(false)}
+          opened={isCartOpened}
+        />
         <Header onCartClick={() => setIsCartOpened(true)} />
 
         <Routes>
