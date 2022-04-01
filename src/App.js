@@ -47,13 +47,28 @@ const App = () => {
   }, []);
 
   const onAddToCart = async product => {
+    const findItem = cartItems.find(el => +el.parentId === +product.id);
+
     try {
-      if (cartItems.find(el => +el.id === +product.id)) {
-        setCartItems(prev => prev.filter(item => +item.id !== +product.id));
-        await axios.delete(`${API_URL}/cart/${product.id}`);
+      if (findItem) {
+        setCartItems(prev =>
+          prev.filter(item => +item.parentId !== +product.id),
+        );
+        await axios.delete(`${API_URL}/cart/${findItem.id}`);
       } else {
         setCartItems(prev => [...prev, product]);
-        await axios.post(`${API_URL}/cart`, product);
+        const { data } = await axios.post(`${API_URL}/cart`, product);
+        setCartItems(prev =>
+          prev.map(item => {
+            if (+item.parentId === +data.parentId) {
+              return {
+                ...item,
+                id: data.id,
+              };
+            }
+            return item;
+          }),
+        );
       }
     } catch (error) {
       alert('Не удалось добавить товар в корзину');
@@ -88,7 +103,7 @@ const App = () => {
     }
   };
 
-  const isInCart = id => cartItems.some(item => +item.id === +id);
+  const isInCart = id => cartItems.some(item => +item.parentId === +id);
 
   return (
     <AppContext.Provider

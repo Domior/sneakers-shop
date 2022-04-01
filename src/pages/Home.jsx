@@ -21,8 +21,8 @@ const Home = () => {
     return (isLoading ? [...Array(8)] : filteredItems).map((item, i) => (
       <Card
         key={item ? item.id : i}
-        onPlusClick={() => onAddToCart(item)}
-        onFavoriteClick={() => onAddToFavorites(item)}
+        onPlusClick={product => onAddToCart(product)}
+        onFavoriteClick={product => onAddToFavorites(product)}
         isLoaded={isLoading}
         {...item}
       />
