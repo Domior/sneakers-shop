@@ -14,7 +14,7 @@ const Header = ({ onCartClick }) => {
             className="mr-15"
             width={40}
             height={40}
-            src="/img/logo.png"
+            src="img/logo.png"
             alt="logo"
           />
           <div>
@@ -30,19 +30,19 @@ const Header = ({ onCartClick }) => {
             className="mr-10"
             width={18}
             height={18}
-            src="/img/cart.svg"
+            src="img/cart.svg"
             alt="cartIcon"
           />
           <span>{orderPrice} $</span>
         </li>
         <li className="mr-30">
           <Link to="/favorites">
-            <img width={18} height={18} src="/img/heart.svg" alt="heartIcon" />
+            <img width={18} height={18} src="img/heart.svg" alt="heartIcon" />
           </Link>
         </li>
         <li>
           <Link to="/orders">
-            <img width={18} height={18} src="/img/user.svg" alt="userIcon" />
+            <img width={18} height={18} src="img/user.svg" alt="userIcon" />
           </Link>
         </li>
       </ul>
