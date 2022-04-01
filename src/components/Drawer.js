@@ -1,16 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 
-import { AppContext } from '../context';
+import { useCart } from '../hooks/useCart';
 
-import CartInfo from './CartInfo.jsx';
+import CartInfo from './CartInfo';
 
 const API_URL = 'https://624341cd3da3ac772b009b52.mockapi.io';
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const Drawer = ({ items = [], onItemRemove, onClose }) => {
-  const { cartItems, setCartItems } = React.useContext(AppContext);
+  const { cartItems, setCartItems, orderPrice, deliveryPrice } = useCart();
 
   const [isOrderCompleted, setIsOrderCompleted] = React.useState(false);
   const [orderId, setOrderId] = React.useState(null);
@@ -80,14 +80,19 @@ const Drawer = ({ items = [], onItemRemove, onClose }) => {
             <div className="cartTotalBlock">
               <ul>
                 <li>
-                  <span>Итого:</span>
+                  <span>Сумма заказа:</span>
                   <div></div>
-                  <b>1000 $</b>
+                  <b>{orderPrice} $</b>
                 </li>
                 <li>
-                  <span>Налог 5%:</span>
+                  <span>Доставка:</span>
                   <div></div>
-                  <b>50$</b>
+                  <b>{deliveryPrice} $</b>
+                </li>
+                <li>
+                  <span>Итого:</span>
+                  <div></div>
+                  <b>{orderPrice + deliveryPrice} $</b>
                 </li>
               </ul>
               <button
